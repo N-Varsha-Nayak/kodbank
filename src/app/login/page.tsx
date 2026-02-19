@@ -39,8 +39,15 @@ export default function LoginPage() {
   return (
     <main className="shell">
       <section className="panel">
+        <div className="topbar">
+          <span className="brand">KodBank</span>
+          <span className="badge">Customer Access</span>
+        </div>
+        <span className="eyebrow">
+          Identity Check <b>Step 2</b>
+        </span>
         <h1>Login</h1>
-        <p>Enter valid username and password.</p>
+        <p className="lead">Enter valid username and password.</p>
 
         <form onSubmit={onSubmit} className="grid">
           <div className="field">
@@ -56,14 +63,16 @@ export default function LoginPage() {
             <button type="submit" className="btn primary" disabled={loading}>
               {loading ? "Logging in..." : "Login"}
             </button>
-            <a href="/register" className="btn">
-              Create account
+            <a href="/register" className="btn gold">
+              Create Account
             </a>
           </div>
         </form>
         {!!error && <p className="hint err">{error}</p>}
+        <p className="muted-link">
+          New here? <a href="/register">Open your KodBank account</a>
+        </p>
       </section>
     </main>
   );
 }
-

@@ -45,13 +45,28 @@ export default function RegisterPage() {
   return (
     <main className="shell">
       <section className="panel">
+        <div className="topbar">
+          <span className="brand">KodBank</span>
+          <span className="badge">New Customer</span>
+        </div>
+        <span className="eyebrow">
+          Account Setup <b>Step 1</b>
+        </span>
         <h1>Create Account</h1>
-        <p>Role is fixed to Customer and initial balance is 100000.</p>
 
         <form onSubmit={onSubmit} className="grid">
-          <div className="field">
-            <label htmlFor="uid">UID</label>
-            <input id="uid" name="uid" type="number" required />
+          <div className="split">
+            <div className="field">
+              <label htmlFor="uid">UID</label>
+              <input id="uid" name="uid" type="number" required />
+            </div>
+
+            <div className="field">
+              <label htmlFor="role">Role</label>
+              <select id="role" name="role" value="Customer" disabled>
+                <option value="Customer">Customer</option>
+              </select>
+            </div>
           </div>
 
           <div className="field">
@@ -74,16 +89,9 @@ export default function RegisterPage() {
             <input id="password" name="password" type="password" required />
           </div>
 
-          <div className="field">
-            <label htmlFor="role">Role</label>
-            <select id="role" name="role" value="Customer" disabled>
-              <option value="Customer">Customer</option>
-            </select>
-          </div>
-
           <div className="actions">
             <button type="submit" className="btn primary" disabled={loading}>
-              {loading ? "Creating..." : "Register"}
+              {loading ? "Creating..." : "Create Account"}
             </button>
             <a href="/login" className="btn">
               Go to Login
@@ -93,8 +101,10 @@ export default function RegisterPage() {
 
         {!!message && <p className="hint ok">{message}</p>}
         {!!error && <p className="hint err">{error}</p>}
+        <p className="muted-link">
+          Already registered? <a href="/login">Login securely</a>
+        </p>
       </section>
     </main>
   );
 }
-

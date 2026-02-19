@@ -60,26 +60,35 @@ export default function DashboardPage() {
       )}
 
       <section className="panel">
+        <div className="topbar">
+          <span className="brand">KodBank</span>
+          <span className="badge">Verified Session</span>
+        </div>
+        <span className="eyebrow">
+          Balance Services <b>Live</b>
+        </span>
         <h1>User Dashboard</h1>
-        <p>Welcome. Click below to verify JWT and fetch your balance.</p>
+        <p className="lead">
+          Welcome. Click below to verify your JWT and fetch account balance.
+        </p>
 
         <div className="actions">
           <button className="btn primary" onClick={checkBalance} disabled={loading}>
             {loading ? "Checking..." : "Check Balance"}
           </button>
           <a href="/login" className="btn">
-            Back to Login
+            Switch Account
           </a>
         </div>
 
         {balance && (
-          <p className="hint ok" style={{ fontSize: "1.05rem", fontWeight: 700 }}>
-            your balance is : {balance}
-          </p>
+          <div className="balance-card">
+            <small>Current Available Balance</small>
+            <div className="balance-amount">your balance is : {balance}</div>
+          </div>
         )}
         {!!error && <p className="hint err">{error}</p>}
       </section>
     </main>
   );
 }
-

@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg-a: #081534;
-  --bg-b: #0d7a81;
-  --panel: rgba(255, 255, 255, 0.95);
-  --ink: #0c2340;
-  --accent: #f84b3d;
+  --bg-deep: #041b24;
+  --bg-mid: #063645;
+  --bg-soft: #0a5e61;
+  --ink: #0e2530;
+  --muted: #4f6571;
+  --line: #cfe0e7;
+  --panel: rgba(255, 255, 255, 0.93);
+  --panel-strong: #ffffff;
+  --brand: #0d7c66;
+  --brand-strong: #066252;
+  --gold: #c59c44;
+  --danger: #b4232c;
+  --success: #0c7a4c;
 }
 
 * {
@@ -18,35 +26,127 @@ body {
   color: var(--ink);
   font-family: var(--font-poppins), sans-serif;
   background:
-    radial-gradient(circle at 15% 20%, #4ecdc4 0%, transparent 22%),
-    radial-gradient(circle at 80% 10%, #f9d423 0%, transparent 18%),
-    radial-gradient(circle at 50% 88%, #ff6f91 0%, transparent 20%),
-    linear-gradient(140deg, var(--bg-a), var(--bg-b));
+    radial-gradient(circle at 12% 15%, rgba(22, 203, 171, 0.35), transparent 28%),
+    radial-gradient(circle at 86% 14%, rgba(233, 192, 107, 0.34), transparent 25%),
+    radial-gradient(circle at 45% 92%, rgba(31, 143, 132, 0.3), transparent 27%),
+    linear-gradient(150deg, var(--bg-deep), var(--bg-mid) 50%, var(--bg-soft));
 }
 
 .shell {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: 22px;
 }
 
 .panel {
   width: 100%;
-  max-width: 520px;
-  border-radius: 18px;
-  padding: 28px;
+  max-width: 560px;
+  border-radius: 24px;
+  padding: 30px;
   background: var(--panel);
-  box-shadow: 0 22px 60px rgba(7, 21, 44, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(7px);
+  box-shadow:
+    0 25px 60px rgba(5, 25, 31, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(197, 156, 68, 0.25), transparent 70%);
+  pointer-events: none;
 }
 
 .panel h1 {
-  margin: 0 0 8px;
-  font-size: 2rem;
+  margin: 0 0 6px;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  letter-spacing: -0.02em;
 }
 
 .panel p {
-  margin: 0 0 16px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #eaf5f2;
+  color: var(--brand-strong);
+  border: 1px solid #cbe7de;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.eyebrow b {
+  color: var(--gold);
+}
+
+.lead {
+  margin-top: 8px;
+  margin-bottom: 18px;
+  font-size: 0.98rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.badge {
+  font-size: 0.77rem;
+  color: #5f6f77;
+  background: #f1f6f8;
+  border: 1px solid #d5e1e6;
+  border-radius: 999px;
+  padding: 5px 9px;
+}
+
+.feature-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.feature {
+  background: var(--panel-strong);
+  border: 1px solid #d8e3e8;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.feature strong {
+  display: block;
+  font-size: 0.84rem;
+  margin-bottom: 2px;
+}
+
+.feature span {
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
 .grid {
@@ -60,53 +160,127 @@ body {
 }
 
 .field label {
-  font-size: 0.9rem;
+  font-size: 0.83rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #445762;
   font-weight: 600;
 }
 
 .field input,
 .field select {
-  border: 1px solid #c4d0de;
-  border-radius: 10px;
-  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 13px;
   outline: none;
   font: inherit;
+  background: #fbfdff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #79bcae;
+  box-shadow: 0 0 0 3px rgba(13, 124, 102, 0.15);
 }
 
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .btn {
   border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  background: #dae8f7;
-  color: var(--ink);
+  border-radius: 12px;
+  padding: 11px 16px;
+  background: #e7f0f5;
+  border: 1px solid #c7d8e1;
+  color: #173745;
   text-decoration: none;
   cursor: pointer;
   font: inherit;
   font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(10, 30, 44, 0.15);
 }
 
 .btn.primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+  border-color: transparent;
   color: #fff;
 }
 
+.btn.gold {
+  background: linear-gradient(130deg, #d8b15f, var(--gold));
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.balance-card {
+  margin-top: 18px;
+  background: linear-gradient(130deg, #0f3e4e, #0f6b6b);
+  border-radius: 18px;
+  color: #f7fffd;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.balance-card small {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.74);
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 .hint {
-  font-size: 0.9rem;
-  margin-top: 8px;
+  font-size: 0.88rem;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .ok {
-  color: #00753f;
+  color: var(--success);
 }
 
 .err {
-  color: #c1121f;
+  color: var(--danger);
+}
+
+.muted-link {
+  margin-top: 10px;
+  font-size: 0.84rem;
+  color: #5f6f77;
+}
+
+.muted-link a {
+  color: var(--brand-strong);
+  font-weight: 600;
 }
 
 .party {
@@ -123,10 +297,11 @@ body {
 .confetti i {
   position: absolute;
   width: 10px;
-  height: 18px;
+  height: 16px;
   top: -20px;
-  opacity: 0.8;
-  animation: drop 2.2s linear infinite;
+  opacity: 0.9;
+  border-radius: 2px;
+  animation: drop 2.4s linear infinite;
 }
 
 @keyframes drop {
@@ -134,6 +309,18 @@ body {
     transform: translateY(0) rotate(0deg);
   }
   100% {
-    transform: translateY(420px) rotate(320deg);
+    transform: translateY(560px) rotate(360deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .panel {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .feature-grid,
+  .split {
+    grid-template-columns: 1fr;
   }
 }
