@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const manrope = Manrope({
+  variable: "--font-body",
   weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-display",
+  weight: ["600", "700"],
   subsets: ["latin"],
 });
 
@@ -20,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>{children}</body>
+      <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
