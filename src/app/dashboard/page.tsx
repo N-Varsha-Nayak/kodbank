@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import BrainyBotDrawer from "../components/BrainyBotDrawer";
 
 export default function DashboardPage() {
   const [balance, setBalance] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isBotOpen, setIsBotOpen] = useState(false);
 
   const confettiItems = useMemo(
     () =>
@@ -24,11 +24,41 @@ export default function DashboardPage() {
   );
 
   const transactions = [
-    { title: "Cafe and Restaurant", type: "Expense", amount: "-$150.00", tone: "neg", tag: "DR" },
-    { title: "Market Groceries", type: "Expense", amount: "-$250.00", tone: "neg", tag: "MK" },
-    { title: "Quick Transfer", type: "Income", amount: "+$350.00", tone: "pos", tag: "QT" },
-    { title: "Fuel Station", type: "Expense", amount: "-$90.00", tone: "neg", tag: "FL" },
-    { title: "Retail Cashback", type: "Income", amount: "+$55.00", tone: "pos", tag: "CB" },
+    {
+      title: "Cafe and Restaurant",
+      type: "Expense",
+      amount: "-$150.00",
+      tone: "neg",
+      tag: "DR",
+    },
+    {
+      title: "Market Groceries",
+      type: "Expense",
+      amount: "-$250.00",
+      tone: "neg",
+      tag: "MK",
+    },
+    {
+      title: "Quick Transfer",
+      type: "Income",
+      amount: "+$350.00",
+      tone: "pos",
+      tag: "QT",
+    },
+    {
+      title: "Fuel Station",
+      type: "Expense",
+      amount: "-$90.00",
+      tone: "neg",
+      tag: "FL",
+    },
+    {
+      title: "Retail Cashback",
+      type: "Income",
+      amount: "+$55.00",
+      tone: "pos",
+      tag: "CB",
+    },
   ];
 
   async function checkBalance() {
@@ -68,7 +98,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <section className="bank-dashboard">
+      <section className={`bank-dashboard ${isBotOpen ? "bot-open" : ""}`}>
         <aside className="bank-sidebar">
           <div className="bank-logo">KB</div>
           <nav className="bank-nav">
@@ -221,21 +251,44 @@ export default function DashboardPage() {
                 </div>
               </article>
 
-              <article className="assistant-card soft">
+              <article className="assistant-card premium compact">
                 <div className="assistant-head">
-                  <h2>BrainyBot Assistant</h2>
-                  <p>Ask banking questions and get guided support.</p>
+                  <h2>Need Help?</h2>
+                  <p>Open BrainyBot in-app for instant banking support.</p>
                 </div>
-                <BrainyBotDrawer
-                  title="Start a chat"
-                  description="Open the assistant in a secure drawer."
-                  buttonLabel="Open"
-                />
+                <button className="btn gold bot-launch" onClick={() => setIsBotOpen(true)}>
+                  Open BrainyBot
+                </button>
               </article>
             </section>
           </div>
         </div>
+
+        <aside className={`bot-sidebar ${isBotOpen ? "open" : ""}`}>
+          <div className="bot-sidebar-head">
+            <div>
+              <h3>BrainyBot Assistant</h3>
+              <p>Customer support in sidebar</p>
+            </div>
+            <button
+              type="button"
+              className="bot-close"
+              onClick={() => setIsBotOpen(false)}
+              aria-label="Close BrainyBot"
+            >
+              X
+            </button>
+          </div>
+          <iframe
+            src="https://brainybot-tau.vercel.app/"
+            title="BrainyBot Banking Assistant"
+            className="bot-sidebar-frame"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          />
+        </aside>
       </section>
     </main>
   );
 }
+

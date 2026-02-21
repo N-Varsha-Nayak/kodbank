@@ -1,5 +1,3 @@
-import BrainyBotDrawer from "./components/BrainyBotDrawer";
-
 export default function Home() {
   return (
     <main className="shell">
@@ -73,21 +71,7 @@ export default function Home() {
           </aside>
         </div>
 
-        <article className="hero-card">
-          <div className="topbar">
-            <span className="brand">BrainyBot</span>
-            <span className="badge">Guided Assistant</span>
-          </div>
-          <p className="lead">
-            Meet your embedded banking guide. Ask about account actions, card
-            usage, and safe banking tips.
-          </p>
-          <BrainyBotDrawer
-            title="Open BrainyBot"
-            description="Tap to chat with the banking assistant in a secure drawer."
-            buttonLabel="Launch"
-          />
-        </article>
+        {/* BrainyBot removed from homepage for a cleaner look */}
       </section>
     </main>
   );
